@@ -6,8 +6,16 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
 
 axios.defaults.baseURL = "http://localhost:8181/api";
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers["x-auth-token"] = token;
+  }
+  return config;
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

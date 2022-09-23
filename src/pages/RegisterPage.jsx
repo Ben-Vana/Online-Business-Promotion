@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import loginSchema from "../validation/register.validation";
+import validate from "../validation/validation";
 
 const RegisterPage = () => {
   const [userInput, setUserInput] = useState({
@@ -24,6 +26,9 @@ const RegisterPage = () => {
   };
 
   const handleRegisterForm = () => {
+    const error = validate(userInput, loginSchema);
+    console.log(error);
+    return;
     axios
       .post("/users/register", {
         name: userInput.name,

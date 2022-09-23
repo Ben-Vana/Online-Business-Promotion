@@ -7,9 +7,9 @@ import RickNMortyCardPage from "./pages/RickNMorty";
 const App = () => {
   return (
     <div className="container">
-      <BizCardPage />
-      <AddBizCard />
-      {/* <RegisterPage /> */}
+      {/* <BizCardPage /> */}
+      {/* <AddBizCard /> */}
+      <RegisterPage />
       {/* <LoginPage /> */}
       {/* <RickNMortyCardPage /> */}
     </div>
