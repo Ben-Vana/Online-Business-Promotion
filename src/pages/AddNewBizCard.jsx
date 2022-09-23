@@ -39,6 +39,9 @@ const AddBizCard = () => {
 
   return (
     <>
+      <h3 className="mt-4">
+        Add New Card <span style={{ fontSize: 10 }}>*Login Required</span>
+      </h3>
       <form>
         <div className="form-floating mb-3 mt-2">
           <input

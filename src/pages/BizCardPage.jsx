@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import BizCardComp from "../components/BizCardComp";
 
+let bizCardArr = [];
 const BizCardPage = () => {
-  let bizCardArr = [];
+  const [userInput, setUserInput] = useState("");
   const [cardArr, setCardArr] = useState(bizCardArr);
 
   useEffect(() => {
@@ -18,8 +19,61 @@ const BizCardPage = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    let test = new RegExp(userInput, "i");
+    let tempCardArr = JSON.parse(JSON.stringify(bizCardArr));
+    tempCardArr = tempCardArr.filter((item) => test.test(item.title));
+    setCardArr(tempCardArr);
+  }, [userInput]);
+
+  const handleUserInput = (ev) => {
+    setUserInput(ev.target.value);
+  };
+
+  const handleSort = (c) => {
+    if (c === "up") {
+      let tempCardArr = JSON.parse(JSON.stringify(bizCardArr));
+      tempCardArr.sort((a, b) => a.title.localeCompare(b.title));
+      setCardArr(tempCardArr);
+    } else if (c === "down") {
+      let tempCardArr = JSON.parse(JSON.stringify(bizCardArr));
+      tempCardArr.sort((a, b) => b.title.localeCompare(a.title));
+      setCardArr(tempCardArr);
+    }
+  };
+
   return (
     <>
+      <div className="form-floating mb-3 mt-2">
+        <input
+          onChange={handleUserInput}
+          type="text"
+          className="form-control"
+          id="title"
+          value={userInput.title}
+        />
+        <label htmlFor="title">Title:</label>
+      </div>
+      <div className="btn-group" role="group" aria-label="Basic example">
+        <button
+          onClick={() => {
+            handleSort("down");
+          }}
+          type="button"
+          className="btn btn-primary"
+        >
+          Sort Down
+        </button>
+        <button
+          onClick={() => {
+            handleSort("up");
+          }}
+          type="button"
+          className="btn btn-primary"
+        >
+          Sort Up
+        </button>
+      </div>
       <div className=" row row-cols-md-5 g-2 mt-2">
         {cardArr.map((item) => (
           <BizCardComp
@@ -30,6 +84,7 @@ const BizCardPage = () => {
           />
         ))}
       </div>
+      <hr></hr>
     </>
   );
 };
