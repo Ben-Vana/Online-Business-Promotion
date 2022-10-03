@@ -7,6 +7,8 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
+import store from "./store/index";
+import { BrowserRouter } from "react-router-dom";
 
 axios.defaults.baseURL = "http://localhost:8181/api";
 axios.interceptors.request.use((config) => {
@@ -18,7 +20,13 @@ axios.interceptors.request.use((config) => {
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
+import { authActions } from "../store/auth";
+import { useHistory } from "react-router-dom";
+
 const LoginPage = () => {
   const [userInput, setUserInput] = useState({
     email: "",
     password: "",
   });
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleUserInputChange = (ev) => {
     let newUserInput = JSON.parse(JSON.stringify(userInput));
@@ -20,6 +28,7 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
+        dispatch(authActions.login(jwt_decode(res.data.token)));
         toast.success("Loggin Complete", {
           position: "top-right",
           autoClose: 3000,
@@ -29,6 +38,8 @@ const LoginPage = () => {
           draggable: true,
           progress: undefined,
         });
+        setUserInput({ email: "", password: "" });
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +56,7 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="mt-4" onSubmit={handleSubmit}>
       <h2>Login page</h2>
 
       <div className="form-floating mb-3">

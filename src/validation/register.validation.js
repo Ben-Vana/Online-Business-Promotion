@@ -16,7 +16,7 @@ const loginSchema = {
     .label("Email"),
   password: Joi.string()
     .max(1024)
-    .regex(/^(?=.*[A-Za-z])(?=.*d)[A-Za-z\d]{8,}$/gm)
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gm)
     .required()
     .label("Password"),
   business: Joi.boolean(),

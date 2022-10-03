@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import loginSchema from "../validation/register.validation";
 import validate from "../validation/validation";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const [userInput, setUserInput] = useState({
@@ -27,8 +28,6 @@ const RegisterPage = () => {
 
   const handleRegisterForm = () => {
     const error = validate(userInput, loginSchema);
-    console.log(error);
-    return;
     axios
       .post("/users/register", {
         name: userInput.name,
@@ -38,6 +37,15 @@ const RegisterPage = () => {
       })
       .then((res) => {
         console.log(res);
+        toast.success("Register Complete", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((err) => {
         console.log("error", err);
@@ -45,7 +53,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
+    <div className="mt-4">
       <h2>Register page</h2>
       <div className="form-floating mb-3">
         <input
@@ -80,7 +88,7 @@ const RegisterPage = () => {
         />
         <label htmlFor="password">Password</label>
       </div>
-      <div className="form-check">
+      <div className="form-check mb-2">
         <input
           className="form-check-input"
           type="checkbox"

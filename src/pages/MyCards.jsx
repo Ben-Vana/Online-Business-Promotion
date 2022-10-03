@@ -3,15 +3,16 @@ import axios from "axios";
 import BizCardComp from "../components/BizCardComp";
 
 let bizCardArr = [];
-const BizCardPage = () => {
+const MyCards = () => {
   const [userInput, setUserInput] = useState("");
   const [cardArr, setCardArr] = useState(bizCardArr);
 
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get("/cards/cards");
+        let { data } = await axios.get(`/cards/my-cards`);
         bizCardArr = data;
+        console.log(bizCardArr);
         setCardArr(bizCardArr);
       } catch (err) {
         console.log(err);
@@ -40,6 +41,16 @@ const BizCardPage = () => {
       tempCardArr.sort((a, b) => b.title.localeCompare(a.title));
       setCardArr(tempCardArr);
     }
+  };
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`cards/${id}`)
+      .then((res) => console.log("deleted"))
+      .catch((err) => console.log(err));
+
+    bizCardArr = bizCardArr.filter((item) => item._id !== id);
+    setCardArr(bizCardArr);
   };
 
   return (
@@ -74,19 +85,22 @@ const BizCardPage = () => {
           Sort Up
         </button>
       </div>
-      <div className=" row row-cols-md-4 g-2 mt-2">
-        {cardArr.map((item) => (
-          <BizCardComp
-            key={item.title + item._id}
-            name={item.title}
-            desc={item.description}
-            img={item.image.url}
-            id={item._id}
-          />
-        ))}
+      <div className=" row row-cols-md-5 g-2 mt-2">
+        {cardArr
+          ? cardArr.map((item) => (
+              <BizCardComp
+                key={item.title + item._id}
+                name={item.title}
+                desc={item.description}
+                img={item.image.url}
+                id={item._id}
+                onDelete={handleDelete}
+              />
+            ))
+          : ""}
       </div>
     </>
   );
 };
 
-export default BizCardPage;
+export default MyCards;
