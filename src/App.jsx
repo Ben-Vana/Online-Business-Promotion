@@ -15,6 +15,7 @@ import AuthTest from "./components/AuthTest";
 import AuthGuard from "./components/AuthGuard";
 import { ToastContainer } from "react-toastify";
 import { Route, Switch } from "react-router-dom";
+import Qsort from "./pages/QPArray";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
       </Switch>
       <ToastContainer />
       <QpFunction />
+      <Qsort />
       {/* <BizCardPage /> */}
       {/* <LoginPage /> */}
       {/* <AddBizCard /> */}
