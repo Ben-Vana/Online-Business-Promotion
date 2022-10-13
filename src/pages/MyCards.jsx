@@ -12,7 +12,6 @@ const MyCards = () => {
       try {
         let { data } = await axios.get(`/cards/my-cards`);
         bizCardArr = data;
-        console.log(bizCardArr);
         setCardArr(bizCardArr);
       } catch (err) {
         console.log(err);
@@ -85,7 +84,7 @@ const MyCards = () => {
           Sort Up
         </button>
       </div>
-      <div className=" row row-cols-md-5 g-2 mt-2">
+      <div className=" row row-cols-md-4 g-2 mt-2">
         {cardArr
           ? cardArr.map((item) => (
               <BizCardComp
@@ -95,6 +94,7 @@ const MyCards = () => {
                 img={item.image.url}
                 id={item._id}
                 onDelete={handleDelete}
+                show={true}
               />
             ))
           : ""}

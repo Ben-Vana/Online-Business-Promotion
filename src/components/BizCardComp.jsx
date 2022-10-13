@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const BizCardComp = ({ name, desc, img, id, onDelete }) => {
+const BizCardComp = ({ name, desc, img, id, onDelete, show }) => {
   return (
     <div className="col-4">
       <div className="card">
@@ -21,13 +21,24 @@ const BizCardComp = ({ name, desc, img, id, onDelete }) => {
           ) : (
             <></>
           )}
-          <Link
-            to={`/moreinfo/${id}`}
-            type="button"
-            className="btn btn-warning"
-          >
-            Show More
-          </Link>
+          {onDelete ? (
+            <Link to={`/editcard/${id}`} className="btn btn-warning me-2">
+              Edit
+            </Link>
+          ) : (
+            <></>
+          )}
+          {show ? (
+            <Link
+              to={`/moreinfo/${id}`}
+              type="button"
+              className="btn btn-warning"
+            >
+              Show More
+            </Link>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

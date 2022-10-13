@@ -82,6 +82,7 @@ const BizCardPage = () => {
             desc={item.description}
             img={item.image.url}
             id={item._id}
+            show={true}
           />
         ))}
       </div>

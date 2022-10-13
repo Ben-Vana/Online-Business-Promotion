@@ -26,6 +26,7 @@ const MoreInfoPage = () => {
         desc={bizArr.description}
         img={bizArr.image.url}
         id={bizArr._id}
+        show={false}
       />
     )
   );

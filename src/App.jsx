@@ -9,6 +9,10 @@ import HomePage from "./pages/HomePage";
 import MoreInfoPage from "./pages/MoreInfoPage";
 import ShowNum from "./pages/ShowNum";
 import MyCards from "./pages/MyCards";
+import EditCard from "./pages/EditCard";
+import QpFunction from "./pages/QparamsFunction";
+import AuthTest from "./components/AuthTest";
+import AuthGuard from "./components/AuthGuard";
 import { ToastContainer } from "react-toastify";
 import { Route, Switch } from "react-router-dom";
 
@@ -18,14 +22,17 @@ const App = () => {
       <NavBarComponent />
       <Switch>
         <Route path="/" exact component={HomePage}></Route>
+        {/* <AuthTest path="/login" component={LoginPage}></AuthTest> */}
         <Route path="/login" component={LoginPage}></Route>
         <Route path="/register" component={RegisterPage}></Route>
         <Route path="/cardspage" component={BizCardPage}></Route>
-        <Route path="/createcard" component={AddBizCard}></Route>
-        <Route path="/MyCards" component={MyCards}></Route>
-        <Route path="/moreinfo/:id" component={MoreInfoPage}></Route>
+        <AuthGuard path="/createcard" component={AddBizCard}></AuthGuard>
+        <AuthGuard path="/myCards" component={MyCards}></AuthGuard>
+        <AuthGuard path="/moreinfo/:id" component={MoreInfoPage}></AuthGuard>
+        <AuthGuard path="/editcard/:id" component={EditCard}></AuthGuard>
       </Switch>
       <ToastContainer />
+      <QpFunction />
       {/* <BizCardPage /> */}
       {/* <LoginPage /> */}
       {/* <AddBizCard /> */}

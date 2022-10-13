@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const AddBizCard = () => {
   const [userInput, setUserInput] = useState({
@@ -9,6 +10,8 @@ const AddBizCard = () => {
     address: "",
     phone: "",
   });
+
+  const history = useHistory();
 
   const handleUserInput = (ev) => {
     let newInput = JSON.parse(JSON.stringify(userInput));
@@ -34,7 +37,9 @@ const AddBizCard = () => {
       alert("Please update the empty fields");
       return;
     }
-    axios.post("/cards/", userInput);
+    axios.post("/cards/", userInput).then(() => {
+      history.push("/mycards");
+    });
   };
 
   return (
