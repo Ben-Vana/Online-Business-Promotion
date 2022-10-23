@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import BizCardComp from "../components/BizCardComp";
+import BizCardComp from "components/BizCardComp";
 
 let bizCardArr = [];
 const BizCardPage = () => {

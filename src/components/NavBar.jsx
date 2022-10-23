@@ -1,9 +1,9 @@
-import { authActions } from "../store/auth";
+import { authActions } from "store/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import LinkSort from "./LinkSort";
+import LinkSort from "components/LinkSort";
 import { NavLink, useHistory } from "react-router-dom";
 
 let links = [
@@ -53,25 +53,26 @@ let authLinks = {
 
 const NavBarComponent = () => {
   let [name, setName] = useState("");
+  let [loadWait, setLoadWait] = useState(false);
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.auth.logIn);
   const userData = useSelector((state) => state.auth.userData);
   const history = useHistory();
 
   useEffect(() => {
-    axios
-      .get("/users/userInfo")
-      .then(({ data }) => {
-        if (data) {
-          dispatch(
-            authActions.login(jwt_decode(localStorage.getItem("token")))
-          );
-          setName(data.name);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    let isToken = localStorage.getItem("token");
+    if (isToken) {
+      axios
+        .get("/users/userInfo")
+        .then(({ data }) => {
+          if (data) {
+            setName(data.name);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [loggedIn]);
 
   const changeStyle = (ev) => {
@@ -96,6 +97,17 @@ const NavBarComponent = () => {
           <span className="navbar-brand" href="#">
             Navbar
           </span>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {links.map((item, index) => (
@@ -120,7 +132,7 @@ const NavBarComponent = () => {
                 </span>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <ul className="navbar-nav mb-lg-0">
               {loggedIn
                 ? authLinks.loggedIn.map((item, index) => (
                     <span
@@ -136,21 +148,16 @@ const NavBarComponent = () => {
                   ))
                 : authLinks.loggedOut.map((item, index) => (
                     <NavLink
-                      className="me-2 text-decoration-none text-reset"
+                      className="text-decoration-none nav-link"
                       role="button"
                       key={item.label + index}
+                      isActive={(match, location) => match && match.isExact}
                       to={item.link}
                     >
-                      <span
-                        style={{ color: "rgba(55,55,55,.7)" }}
-                        onMouseEnter={changeStyle}
-                        onMouseLeave={changeStyleBack}
-                      >
-                        {item.label}
-                      </span>
+                      {item.label}
                     </NavLink>
                   ))}
-            </form>
+            </ul>
           </div>
         </div>
       </nav>

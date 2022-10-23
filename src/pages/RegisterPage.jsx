@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import loginSchema from "../validation/register.validation";
-import validate from "../validation/validation";
+import loginSchema from "validation/register.validation";
+import validate from "validation/validation";
 import { toast } from "react-toastify";
 
 const RegisterPage = () => {

@@ -5,7 +5,7 @@ const LinkSort = ({ label, link }) => {
     <li className="nav-item">
       <NavLink
         role="button"
-        className="nav-link  text-decoration-none"
+        className="nav-link"
         isActive={(match, location) => match && match.isExact}
         to={link}
       >

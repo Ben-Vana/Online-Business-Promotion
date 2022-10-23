@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import BizCardComp from "../components/BizCardComp";
+import BizCardComp from "components/BizCardComp";
 
 const MoreInfoPage = () => {
   const [bizArr, setArr] = useState(null);

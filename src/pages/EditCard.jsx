@@ -2,7 +2,6 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import BizCardComp from "../components/BizCardComp";
 
 const EditCard = () => {
   const [userInput, setInput] = useState({
@@ -123,11 +122,6 @@ const EditCard = () => {
         Update
       </button>
     </>
-    // name={bizArr.title}
-    // desc={bizArr.description}
-    // img={bizArr.image.url}
-    // id={bizArr._id}
-    // show={false}
   );
 };
 

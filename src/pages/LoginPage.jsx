@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import jwt_decode from "jwt-decode";
-import { authActions } from "../store/auth";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
+import { useRef } from "react";
+import useAutoLogin from "hooks/useAutoLogin";
 
 const LoginPage = () => {
   const [userInput, setUserInput] = useState({
@@ -12,8 +13,10 @@ const LoginPage = () => {
     password: "",
   });
 
-  const dispatch = useDispatch();
   const history = useHistory();
+  const emailRef = useRef();
+  const isLoggedIn = useSelector((state) => state.auth.logIn);
+  const autoLoginFunc = useAutoLogin();
 
   const handleUserInputChange = (ev) => {
     let newUserInput = JSON.parse(JSON.stringify(userInput));
@@ -21,37 +24,27 @@ const LoginPage = () => {
     setUserInput(newUserInput);
   };
 
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/");
+    }
+  }, [isLoggedIn]);
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     axios
       .post("/users/login", userInput)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("token", res.data.token);
-        dispatch(authActions.login(jwt_decode(res.data.token)));
-        toast.success("Loggin Complete", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-        setUserInput({ email: "", password: "" });
+      .then(({ data }) => {
+        localStorage.setItem("token", data.token);
+        autoLoginFunc(data.token);
         history.push("/");
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Email or Password are incorrect", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
       });
   };
 
@@ -67,6 +60,7 @@ const LoginPage = () => {
           placeholder="name@example.com"
           value={userInput.email}
           onChange={handleUserInputChange}
+          ref={emailRef}
         />
         <label htmlFor="email">Email address</label>
       </div>
