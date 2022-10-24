@@ -7,7 +7,7 @@ import HomePage from "pages/HomePage";
 import MoreInfoPage from "pages/MoreInfoPage";
 import MyCards from "pages/MyCards";
 import EditCard from "pages/EditCard";
-import AuthGuard from "components/AuthGuard";
+import LoginGuard from "components/LoginAuthGuard";
 import { ToastContainer } from "react-toastify";
 import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -43,13 +43,15 @@ const App = () => {
           <Route path="/login" component={LoginPage}></Route>
           <Route path="/register" component={RegisterPage}></Route>
           <Route path="/cardspage" component={BizCardPage}></Route>
-          <AuthGuard path="/createcard" component={AddBizCard}></AuthGuard>
-          <AuthGuard path="/myCards" component={MyCards}></AuthGuard>
-          <AuthGuard path="/moreinfo/:id" component={MoreInfoPage}></AuthGuard>
-          <AuthGuard path="/editcard/:id" component={EditCard}></AuthGuard>
+          <LoginGuard path="/createcard" component={AddBizCard}></LoginGuard>
+          <LoginGuard path="/myCards" component={MyCards}></LoginGuard>
+          <LoginGuard
+            path="/moreinfo/:id"
+            component={MoreInfoPage}
+          ></LoginGuard>
+          <LoginGuard path="/editcard/:id" component={EditCard}></LoginGuard>
         </Switch>
       )}
-      <ToastContainer />
     </div>
   );
 };

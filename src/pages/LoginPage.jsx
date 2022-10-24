@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
-import { useRef } from "react";
 import useAutoLogin from "hooks/useAutoLogin";
 
 const LoginPage = () => {
@@ -13,12 +11,15 @@ const LoginPage = () => {
     password: "",
   });
 
+  const [loginErr, setLoginErr] = useState("");
+
   const history = useHistory();
   const emailRef = useRef();
   const isLoggedIn = useSelector((state) => state.auth.logIn);
   const autoLoginFunc = useAutoLogin();
 
   const handleUserInputChange = (ev) => {
+    setLoginErr("");
     let newUserInput = JSON.parse(JSON.stringify(userInput));
     newUserInput[ev.target.id] = ev.target.value;
     setUserInput(newUserInput);
@@ -44,7 +45,12 @@ const LoginPage = () => {
         history.push("/");
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.data) {
+          setLoginErr("Email or Password are incorrect");
+        }
+        if (err.message === `Network Error`) {
+          setLoginErr("Sorry, Something went wrong try again later");
+        }
       });
   };
 
@@ -74,6 +80,7 @@ const LoginPage = () => {
           onChange={handleUserInputChange}
         />
         <label htmlFor="password">Password</label>
+        <div style={{ color: "red" }}>{loginErr}</div>
       </div>
       <button className="btn btn-primary">Login</button>
     </form>
