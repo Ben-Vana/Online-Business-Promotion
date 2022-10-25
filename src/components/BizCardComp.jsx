@@ -1,4 +1,10 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrash,
+  faPenToSquare,
+  faMaximize,
+} from "@fortawesome/free-solid-svg-icons";
 
 const BizCardComp = ({ name, desc, img, id, onDelete, show }) => {
   return (
@@ -8,37 +14,39 @@ const BizCardComp = ({ name, desc, img, id, onDelete, show }) => {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{desc}</p>
-          {onDelete ? (
-            <button
-              onClick={() => {
-                onDelete(id);
-              }}
-              type="button"
-              className="btn btn-warning me-2"
-            >
-              Delete
-            </button>
-          ) : (
-            <></>
-          )}
-          {onDelete ? (
-            <Link to={`/editcard/${id}`} className="btn btn-warning me-2">
-              Edit
-            </Link>
-          ) : (
-            <></>
-          )}
           {show ? (
             <Link
               to={`/moreinfo/${id}`}
               type="button"
               className="btn btn-warning"
             >
-              Show More
+              <FontAwesomeIcon icon={faMaximize} /> Show More
             </Link>
           ) : (
             <></>
           )}
+          <div className="mt-1">
+            {onDelete ? (
+              <Link to={`/editcard/${id}`} className="btn btn-warning me-2">
+                <FontAwesomeIcon icon={faPenToSquare} /> Edit
+              </Link>
+            ) : (
+              <></>
+            )}
+            {onDelete ? (
+              <button
+                onClick={() => {
+                  onDelete(id);
+                }}
+                type="button"
+                className="btn btn-warning me-2"
+              >
+                <FontAwesomeIcon icon={faTrash} /> Delete
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
     </div>

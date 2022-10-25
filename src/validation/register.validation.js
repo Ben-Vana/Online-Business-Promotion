@@ -10,13 +10,13 @@ const RegisterSchema = {
   email: Joi.string()
     .email()
     .min(8)
-    .max(1024)
+    .max(255)
     .regex(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
     .required()
     .label("Email"),
   password: Joi.string()
     .min(8)
-    .max(1024)
+    .max(255)
     .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/gm)
     .required()
     .label("Password"),

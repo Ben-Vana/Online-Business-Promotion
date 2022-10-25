@@ -2,7 +2,6 @@ import { authActions } from "store/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 import LinkSort from "components/LinkSort";
 import { NavLink, useHistory } from "react-router-dom";
 
@@ -53,7 +52,6 @@ let authLinks = {
 
 const NavBarComponent = () => {
   let [name, setName] = useState("");
-  let [loadWait, setLoadWait] = useState(false);
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.auth.logIn);
   const userData = useSelector((state) => state.auth.userData);
@@ -94,9 +92,9 @@ const NavBarComponent = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <span className="navbar-brand" href="#">
+          <NavLink to={"/"} className="navbar-brand">
             Navbar
-          </span>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -127,7 +125,10 @@ const NavBarComponent = () => {
                   ))
                 : ""}
               <li className="nav-item">
-                <span style={{ color: "#000" }} className="nav-link">
+                <span
+                  style={{ color: "#000" }}
+                  className="nav-link fw-semibold"
+                >
                   {loggedIn ? "Welcome " + name : "Welcome guest"}{" "}
                 </span>
               </li>
@@ -151,7 +152,7 @@ const NavBarComponent = () => {
                       className="text-decoration-none nav-link"
                       role="button"
                       key={item.label + index}
-                      isActive={(match, location) => match && match.isExact}
+                      isActive={(match) => match && match.isExact}
                       to={item.link}
                     >
                       {item.label}

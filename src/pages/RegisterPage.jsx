@@ -39,7 +39,8 @@ const RegisterPage = () => {
     setUserInput(newBuz);
   };
 
-  const handleRegisterForm = () => {
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
     const { error } = validate(userInput, RegisterSchema);
     if (error) {
       let nameErr = "";
@@ -119,67 +120,67 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-3">
       <h2>Register page</h2>
-      <div className="form-floating mb-3">
-        <input
-          type="text"
-          className="form-control"
-          id="name"
-          placeholder="Name"
-          value={userInput.name}
-          onChange={handleUserInputChange}
-          ref={formRef}
-        />
-        <label htmlFor="name">Name</label>
-        <div style={{ color: "red" }}>
-          {errMsg.nameMsg ? errMsg.nameMsg : ""}
+      <form className="mt-4" onSubmit={handleSubmit}>
+        <div className="form-floating mb-3">
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            placeholder="Name"
+            value={userInput.name}
+            onChange={handleUserInputChange}
+            ref={formRef}
+          />
+          <label htmlFor="name">Name</label>
+          <div style={{ color: "red" }}>
+            {errMsg.nameMsg ? errMsg.nameMsg : ""}
+          </div>
         </div>
-      </div>
-      <div className="form-floating mb-3">
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          placeholder="name@example.com"
-          value={userInput.email}
-          onChange={handleUserInputChange}
-        />
-        <label htmlFor="email">Email address</label>
-        <div style={{ color: "red" }}>
-          {errMsg.emailMsg ? errMsg.emailMsg : ""}
+        <div className="form-floating mb-3">
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            placeholder="name@example.com"
+            value={userInput.email}
+            onChange={handleUserInputChange}
+          />
+          <label htmlFor="email">Email address</label>
+          <div style={{ color: "red" }}>
+            {errMsg.emailMsg ? errMsg.emailMsg : ""}
+          </div>
         </div>
-      </div>
-      <div className="form-floating  mb-3">
-        <input
-          type="password"
-          className="form-control"
-          id="password"
-          placeholder="Password"
-          value={userInput.password}
-          onChange={handleUserInputChange}
-        />
-        <label htmlFor="password">Password</label>
-        <div style={{ color: "red" }}>
-          {errMsg.passwordMsg ? errMsg.passwordMsg : ""}
+        <div className="form-floating  mb-3">
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder="Password"
+            value={userInput.password}
+            onChange={handleUserInputChange}
+          />
+          <label htmlFor="password">Password</label>
+          <div style={{ color: "red" }}>
+            {errMsg.passwordMsg ? errMsg.passwordMsg : ""}
+          </div>
         </div>
-      </div>
-      <div className="form-check mb-2">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value=""
-          id="business"
-          onChange={handleBuz}
-          checked={userInput.business}
-        />
-        <label className="form-check-label" htmlFor="business">
-          Business Class
-        </label>
-      </div>
-      <button className="btn btn-primary" onClick={handleRegisterForm}>
-        Register
-      </button>
+        <div className="form-check mb-2">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value=""
+            id="business"
+            onChange={handleBuz}
+            checked={userInput.business}
+          />
+          <label className="form-check-label" htmlFor="business">
+            Business Class
+          </label>
+        </div>
+        <button className="btn btn-primary">Sign up</button>
+      </form>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BizCardComp from "components/BizCardComp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpZA, faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
 
 let bizCardArr = [];
 const BizCardPage = () => {
@@ -52,7 +54,7 @@ const BizCardPage = () => {
           id="title"
           value={userInput.title}
         />
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="title">Search Card:</label>
       </div>
       <div className="btn-group" role="group" aria-label="Basic example">
         <button
@@ -62,7 +64,7 @@ const BizCardPage = () => {
           type="button"
           className="btn btn-primary me-1"
         >
-          Sort Down
+          <FontAwesomeIcon icon={faArrowUpZA} />
         </button>
         <button
           onClick={() => {
@@ -71,7 +73,7 @@ const BizCardPage = () => {
           type="button"
           className="btn btn-primary"
         >
-          Sort Up
+          <FontAwesomeIcon icon={faArrowDownAZ} />
         </button>
       </div>
       <div className=" row row-cols-md-4 g-2 mt-2">
