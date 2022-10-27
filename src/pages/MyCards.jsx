@@ -87,19 +87,19 @@ const MyCards = () => {
         </button>
       </div>
       <div className=" row row-cols-md-4 g-2 mt-2">
-        {cardArr
-          ? cardArr.map((item) => (
-              <BizCardComp
-                key={item.title + item._id}
-                name={item.title}
-                desc={item.description}
-                img={item.image.url}
-                id={item._id}
-                onDelete={handleDelete}
-                show={true}
-              />
-            ))
-          : ""}
+        {cardArr &&
+          cardArr.map((item) => (
+            <BizCardComp
+              key={item.title + item._id}
+              name={item.title}
+              desc={item.description}
+              img={item.image.url}
+              alt={item.image.alt}
+              id={item._id}
+              onDelete={handleDelete}
+              show={true}
+            />
+          ))}
       </div>
     </>
   );

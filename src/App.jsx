@@ -8,7 +8,6 @@ import MoreInfoPage from "pages/MoreInfoPage";
 import MyCards from "pages/MyCards";
 import EditCard from "pages/EditCard";
 import LoginGuard from "components/LoginAuthGuard";
-import { ToastContainer } from "react-toastify";
 import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAutoLogin from "hooks/useAutoLogin";

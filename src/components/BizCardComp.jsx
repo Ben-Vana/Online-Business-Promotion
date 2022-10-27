@@ -6,11 +6,11 @@ import {
   faMaximize,
 } from "@fortawesome/free-solid-svg-icons";
 
-const BizCardComp = ({ name, desc, img, id, onDelete, show }) => {
+const BizCardComp = ({ name, desc, img, alt, id, onDelete, show }) => {
   return (
     <div className="col-4">
       <div className="card">
-        <img src={img} className="card-img-top w-100 p-1" alt="..." />
+        <img src={img} className="card-img-top w-100 p-1" alt={alt} />
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{desc}</p>
@@ -19,6 +19,7 @@ const BizCardComp = ({ name, desc, img, id, onDelete, show }) => {
               to={`/moreinfo/${id}`}
               type="button"
               className="btn btn-warning"
+              style={{ fontSize: 14 }}
             >
               <FontAwesomeIcon icon={faMaximize} /> Show More
             </Link>
@@ -27,7 +28,11 @@ const BizCardComp = ({ name, desc, img, id, onDelete, show }) => {
           )}
           <div className="mt-1">
             {onDelete ? (
-              <Link to={`/editcard/${id}`} className="btn btn-warning me-2">
+              <Link
+                to={`/editcard/${id}`}
+                className="btn btn-warning me-2"
+                style={{ fontSize: 14 }}
+              >
                 <FontAwesomeIcon icon={faPenToSquare} /> Edit
               </Link>
             ) : (
@@ -40,6 +45,7 @@ const BizCardComp = ({ name, desc, img, id, onDelete, show }) => {
                 }}
                 type="button"
                 className="btn btn-warning me-2"
+                style={{ fontSize: 14 }}
               >
                 <FontAwesomeIcon icon={faTrash} /> Delete
               </button>

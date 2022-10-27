@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import BizCardComp from "components/BizCardComp";
 
 const MoreInfoPage = () => {
   const [bizArr, setArr] = useState(null);
+  const history = useHistory();
   let { id } = useParams();
 
   useEffect(() => {
@@ -19,15 +20,28 @@ const MoreInfoPage = () => {
     })();
   }, []);
 
+  const handleBack = () => {
+    history.goBack();
+  };
+
   return (
     bizArr && (
-      <BizCardComp
-        name={bizArr.title}
-        desc={bizArr.description}
-        img={bizArr.image.url}
-        id={bizArr._id}
-        show={false}
-      />
+      <div className="mt-1">
+        <button
+          type="button"
+          className="btn btn-dark mb-2"
+          onClick={handleBack}
+        >
+          Go back
+        </button>
+        <BizCardComp
+          name={bizArr.title}
+          desc={bizArr.description}
+          img={bizArr.image.url}
+          id={bizArr._id}
+          show={false}
+        />
+      </div>
     )
   );
 };

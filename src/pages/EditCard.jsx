@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CardInput from "components/CardInput";
+import validate from "validation/validation";
+import cardSchema from "validation/card.validation";
 
 const EditCard = () => {
   const [userInput, setInput] = useState({
@@ -11,6 +13,16 @@ const EditCard = () => {
     address: "",
     phone: "",
     url: "",
+  });
+
+  const [errMsg, setErrMsg] = useState({
+    titleErr: false,
+    subTitleErr: false,
+    descriptionErr: false,
+    addressErr: false,
+    phoneErr: false,
+    urlErr: false,
+    errCalled: false,
   });
 
   const { id } = useParams();
@@ -35,93 +47,114 @@ const EditCard = () => {
   }, []);
 
   const handleInputChange = (ev) => {
-    let tempUserInput = JSON.parse(JSON.stringify(userInput));
-    if (tempUserInput.hasOwnProperty(ev.target.id)) {
-      tempUserInput[ev.target.id] = ev.target.value;
-      setInput(tempUserInput);
+    if (errMsg.errCalled === true) {
+      setErrMsg({
+        titleErr: false,
+        subTitleErr: false,
+        descriptionErr: false,
+        addressErr: false,
+        phoneErr: false,
+        urlErr: false,
+        errCalled: false,
+      });
     }
+    let tempUserInput = JSON.parse(JSON.stringify(userInput));
+    tempUserInput[ev.target.id] = ev.target.value;
+    setInput(tempUserInput);
   };
 
-  const handleUpdateCard = async () => {
-    try {
-      let { data } = await axios.put(`/cards/${id}`, {
+  const handleSubmitBtn = async (ev) => {
+    ev.preventDefault();
+    const { error } = validate(
+      {
         title: userInput.title,
         subTitle: userInput.subTitle,
         description: userInput.description,
         address: userInput.address,
         phone: userInput.phone,
         url: userInput.url,
+      },
+      cardSchema
+    );
+    if (error) {
+      let titleMsg, subTitleMsg, descriptionMsg, addressMsg, phoneMsg, urlMsg;
+      error.details.forEach((err) => {
+        switch (err.path[0]) {
+          case "title":
+            titleMsg = true;
+            break;
+          case "subTitle":
+            subTitleMsg = true;
+            break;
+          case "description":
+            descriptionMsg = true;
+            break;
+          case "address":
+            addressMsg = true;
+            break;
+          case "phone":
+            phoneMsg = true;
+            break;
+          case "url":
+            urlMsg = true;
+            break;
+          default:
+            break;
+        }
       });
-      if (data) {
-        history.push("/mycards");
+      setErrMsg({
+        titleErr: titleMsg,
+        subTitleErr: subTitleMsg,
+        descriptionErr: descriptionMsg,
+        addressErr: addressMsg,
+        phoneErr: phoneMsg,
+        urlErr: urlMsg,
+        errCalled: true,
+      });
+    }
+    if (!error) {
+      let defaultUrl = userInput.url;
+      if (userInput.url === "") {
+        defaultUrl =
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
       }
-    } catch (err) {
-      console.log(err);
+      try {
+        let { data } = await axios.put(`/cards/${id}`, {
+          title: userInput.title,
+          subTitle: userInput.subTitle,
+          description: userInput.description,
+          address: userInput.address,
+          phone: userInput.phone,
+          url: `${defaultUrl}`,
+          alt: userInput.title + " logo",
+        });
+        if (data) {
+          history.push("/mycards");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   return (
-    <>
-      <div className="form mb-3 mt-2">
-        <label htmlFor="title" className="mb-2">
-          Title:
-        </label>
-        <input
-          onChange={handleInputChange}
-          type="text"
-          className="form-control w-25"
-          id="title"
-          value={userInput.title}
-        />
-        <label htmlFor="subtitle" className="mb-2 mt-4">
-          SubTitle:
-        </label>
-        <input
-          onChange={handleInputChange}
-          type="text"
-          className="form-control w-25"
-          id="subtitle"
-          value={userInput.subTitle}
-        />
-        <label htmlFor="description" className="mb-2 mt-4">
-          Description:
-        </label>
-        <input
-          onChange={handleInputChange}
-          type="text"
-          className="form-control w-25"
-          id="description"
-          value={userInput.description}
-        />
-        <label htmlFor="address" className="mb-2 mt-4">
-          Address:
-        </label>
-        <input
-          onChange={handleInputChange}
-          type="text"
-          className="form-control w-25"
-          id="address"
-          value={userInput.address}
-        />
-        <label htmlFor="phone" className="mb-2 mt-4">
-          Phone:
-        </label>
-        <input
-          onChange={handleInputChange}
-          type="text"
-          className="form-control w-25"
-          id="phone"
-          value={userInput.phone}
-        />
-      </div>
-      <button
-        onClick={handleUpdateCard}
-        type="button"
-        className="btn btn-primary"
-      >
-        Update
-      </button>
-    </>
+    <CardInput
+      pageTitle="Edit Business Card"
+      title={userInput.title}
+      subTitle={userInput.subTitle}
+      description={userInput.description}
+      address={userInput.address}
+      phone={userInput.phone}
+      url={userInput.url}
+      handleUserInput={handleInputChange}
+      handleSubmitBtn={handleSubmitBtn}
+      titleErr={errMsg.titleErr}
+      subTitleErr={errMsg.subTitleErr}
+      descriptionErr={errMsg.descriptionErr}
+      addressErr={errMsg.addressErr}
+      phoneErr={errMsg.phoneErr}
+      urlErr={errMsg.urlErr}
+    />
   );
 };
 
