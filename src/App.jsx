@@ -12,6 +12,7 @@ import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAutoLogin from "hooks/useAutoLogin";
 import { useSelector } from "react-redux";
+import Footer from "components/Footer";
 
 const App = () => {
   const [tryLogin, setTryLogin] = useState(true);
@@ -34,23 +35,33 @@ const App = () => {
   }, [loggedIn]);
 
   return (
-    <div className="container">
-      <NavBarComponent />
-      {!tryLogin && (
-        <Switch>
-          <Route path="/" exact component={HomePage}></Route>
-          <Route path="/login" component={LoginPage}></Route>
-          <Route path="/register" component={RegisterPage}></Route>
-          <Route path="/cardspage" component={BizCardPage}></Route>
-          <LoginGuard path="/createcard" component={AddBizCard}></LoginGuard>
-          <LoginGuard path="/myCards" component={MyCards}></LoginGuard>
-          <LoginGuard
-            path="/moreinfo/:id"
-            component={MoreInfoPage}
-          ></LoginGuard>
-          <LoginGuard path="/editcard/:id" component={EditCard}></LoginGuard>
-        </Switch>
-      )}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        backgroundColor: "#333",
+      }}
+    >
+      <div className="container">
+        <NavBarComponent />
+        {!tryLogin && (
+          <Switch>
+            <Route path="/" exact component={HomePage}></Route>
+            <Route path="/login" component={LoginPage}></Route>
+            <Route path="/register" component={RegisterPage}></Route>
+            <Route path="/cardspage" component={BizCardPage}></Route>
+            <LoginGuard path="/createcard" component={AddBizCard}></LoginGuard>
+            <LoginGuard path="/myCards" component={MyCards}></LoginGuard>
+            <LoginGuard
+              path="/moreinfo/:id"
+              component={MoreInfoPage}
+            ></LoginGuard>
+            <LoginGuard path="/editcard/:id" component={EditCard}></LoginGuard>
+          </Switch>
+        )}
+      </div>
+      <Footer />
     </div>
   );
 };

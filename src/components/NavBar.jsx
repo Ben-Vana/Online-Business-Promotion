@@ -90,7 +90,7 @@ const NavBarComponent = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-light">
+      <nav className="navbar navbar-expand-lg bg-dark">
         <div className="container-fluid">
           <NavLink to={"/"} className="navbar-brand">
             Navbar
