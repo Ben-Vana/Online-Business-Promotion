@@ -29,16 +29,19 @@ const BizCardPage = () => {
 
   useEffect(() => {
     const qParam = new URLSearchParams(location.search);
+    if (qParam.has("filter")) {
+      setUserInput(qParam.get("filter"));
+    }
     if (qParam.toString() !== "") {
       setCardArr(qp(qParam, bizCardArr));
     }
-  }, [location]);
+  }, [location, bizCardArr]);
 
   const handleKeyUp = (ev) => {
     if (ev.code === "Enter") {
       let qParam = new URLSearchParams(location.search);
       qParam.set("filter", userInput);
-      history.push(`/cardsPage/?${qParam.toString()}`);
+      history.push(`/cardspage/?${qParam.toString()}`);
     }
   };
 
@@ -46,12 +49,12 @@ const BizCardPage = () => {
     if (order === "asc") {
       let qParam = new URLSearchParams(location.search);
       qParam.set("sort", "asc");
-      history.push(`/cardsPage/?${qParam.toString()}`);
+      history.push(`/cardspage/?${qParam.toString()}`);
     }
     if (order === "desc") {
       let qParam = new URLSearchParams(location.search);
       qParam.set("sort", "desc");
-      history.push(`/cardsPage/?${qParam.toString()}`);
+      history.push(`/cardspage/?${qParam.toString()}`);
     }
   };
 

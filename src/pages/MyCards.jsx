@@ -3,11 +3,16 @@ import axios from "axios";
 import BizCardComp from "components/BizCardComp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpZA, faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
+import { useHistory, useLocation } from "react-router-dom";
+import useQparamsFilter from "hooks/useQparamsFilter";
 
 let bizCardArr = [];
 const MyCards = () => {
   const [userInput, setUserInput] = useState("");
   const [cardArr, setCardArr] = useState(bizCardArr);
+  const location = useLocation();
+  const qp = useQparamsFilter();
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -22,25 +27,33 @@ const MyCards = () => {
   }, []);
 
   useEffect(() => {
-    let test = new RegExp(userInput, "i");
-    let tempCardArr = JSON.parse(JSON.stringify(bizCardArr));
-    tempCardArr = tempCardArr.filter((item) => test.test(item.title));
-    setCardArr(tempCardArr);
-  }, [userInput]);
+    const qParam = new URLSearchParams(location.search);
+    if (qParam.has("filter")) {
+      setUserInput(qParam.get("filter"));
+    }
+    if (qParam.toString() !== "") {
+      setCardArr(qp(qParam, bizCardArr));
+    }
+  }, [location, bizCardArr]);
 
-  const handleUserInput = (ev) => {
-    setUserInput(ev.target.value);
+  const handleKeyUp = (ev) => {
+    if (ev.code === "Enter") {
+      let qParam = new URLSearchParams(location.search);
+      qParam.set("filter", userInput);
+      history.push(`/mycards/?${qParam.toString()}`);
+    }
   };
 
-  const handleSort = (c) => {
-    if (c === "up") {
-      let tempCardArr = JSON.parse(JSON.stringify(bizCardArr));
-      tempCardArr.sort((a, b) => a.title.localeCompare(b.title));
-      setCardArr(tempCardArr);
-    } else if (c === "down") {
-      let tempCardArr = JSON.parse(JSON.stringify(bizCardArr));
-      tempCardArr.sort((a, b) => b.title.localeCompare(a.title));
-      setCardArr(tempCardArr);
+  const handleSort = (order) => {
+    if (order === "asc") {
+      let qParam = new URLSearchParams(location.search);
+      qParam.set("sort", "asc");
+      history.push(`/mycards/?${qParam.toString()}`);
+    }
+    if (order === "desc") {
+      let qParam = new URLSearchParams(location.search);
+      qParam.set("sort", "desc");
+      history.push(`/mycards/?${qParam.toString()}`);
     }
   };
 
@@ -58,18 +71,19 @@ const MyCards = () => {
     <>
       <div className="form-floating mb-3 mt-2">
         <input
-          onChange={handleUserInput}
+          onChange={(ev) => setUserInput(ev.target.value)}
           type="text"
           className="form-control"
-          id="title"
-          value={userInput.title}
+          id="qFilter"
+          value={userInput}
+          onKeyUp={handleKeyUp}
         />
-        <label htmlFor="title">Search Card:</label>
+        <label htmlFor="qFilter">Search Card:</label>
       </div>
       <div className="btn-group" role="group" aria-label="Basic example">
         <button
           onClick={() => {
-            handleSort("down");
+            handleSort("asc");
           }}
           type="button"
           className="btn btn-primary me-1"
@@ -78,7 +92,7 @@ const MyCards = () => {
         </button>
         <button
           onClick={() => {
-            handleSort("up");
+            handleSort("desc");
           }}
           type="button"
           className="btn btn-primary"
