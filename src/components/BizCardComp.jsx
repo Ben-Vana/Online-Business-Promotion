@@ -6,14 +6,44 @@ import {
   faMaximize,
 } from "@fortawesome/free-solid-svg-icons";
 
-const BizCardComp = ({ name, desc, img, alt, id, onDelete, show }) => {
+const BizCardComp = ({
+  name,
+  desc,
+  img,
+  alt,
+  address,
+  phone,
+  id,
+  onDelete,
+  show,
+}) => {
   return (
     <div className="col-4">
-      <div className="card">
-        <img src={img} className="card-img-top w-100 p-1" alt={alt} />
-        <div className="card-body">
+      <div
+        className="card"
+        style={{
+          backgroundColor: "#404258",
+          borderRadius: "0.8rem",
+          padding: "0.5rem",
+        }}
+      >
+        <img
+          style={{ borderRadius: "4rem" }}
+          src={img}
+          className="card-img-top w-100 p-1"
+          alt={alt}
+        />
+        <div className="card-body" style={{ marginTop: "-0.5rem" }}>
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{desc}</p>
+          <hr style={{ color: "#000" }} />
+          <div style={{ marginTop: "-0.2rem" }} className="card-text mb-2">
+            <span style={{ textDecoration: "underline", fontWeight: 600 }}>
+              Call us:
+            </span>{" "}
+            {phone}
+          </div>
+          <div className="card-text mb-3">{address}</div>
           {show ? (
             <Link
               to={`/moreinfo/${id}`}

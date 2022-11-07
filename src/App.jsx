@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import useAutoLogin from "hooks/useAutoLogin";
 import { useSelector } from "react-redux";
 import Footer from "components/Footer";
+import "./App.css";
 
 const App = () => {
   const [tryLogin, setTryLogin] = useState(true);
@@ -35,14 +36,7 @@ const App = () => {
   }, [loggedIn]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-        backgroundColor: "#333",
-      }}
-    >
+    <div className="main-theme">
       <div className="container">
         <NavBarComponent />
         {!tryLogin && (

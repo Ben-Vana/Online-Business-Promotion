@@ -1,0 +1,19 @@
+.link-color > ul > li > a {
+  color: #fff6;
+}
+
+.link-color > ul > li > a.active {
+  color: #fff !important;
+}
+
+.link-hover {
+  transition: color 135ms ease-in-out;
+}
+
+.new-link:hover {
+  color: #fff !important;
+}
+
+.nav-color {
+  background-color: #6b728e !important;
+}

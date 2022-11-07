@@ -1,0 +1,47 @@
+.ntab-style {
+  color: #000 !important;
+  font-size: 1.2rem !important;
+}
+
+.node-enter {
+  opacity: 0;
+}
+
+.node-enter-active {
+  opacity: 1;
+  transition: opacity 550ms ease-in;
+}
+
+.node-exit {
+  opacity: 0;
+}
+
+.node-exit-active {
+  opacity: 1;
+  transition: opacity 550ms ease-in;
+}
+
+.tab-style {
+  border: none !important;
+  background-color: #6b728e !important;
+}
+
+.input-new {
+  color: #000 !important;
+  background-color: #474e68 !important;
+  border: 1px solid #000 !important;
+}
+
+.input-new:focus-visible {
+  box-shadow: none !important;
+  border: 1px solid #000 !important;
+}
+
+.btn-style {
+  background-color: #474e68 !important;
+  border: 1px solid #000 !important;
+}
+
+.btn-style:hover {
+  background-color: #404258 !important;
+}

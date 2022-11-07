@@ -1,0 +1,18 @@
+.input-style {
+  background-color: #474e68 !important;
+  color: #000 !important;
+  border: 1px solid #000 !important;
+}
+
+.btn-new {
+  background-color: #474e68 !important;
+  border: 1px solid #000 !important;
+}
+
+.btn-new:hover {
+  background-color: #404258 !important;
+}
+
+.btn-new:focus-visible {
+  box-shadow: none !important;
+}

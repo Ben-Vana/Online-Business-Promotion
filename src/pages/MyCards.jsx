@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpZA, faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
 import { useHistory, useLocation } from "react-router-dom";
 import useQparamsFilter from "hooks/useQparamsFilter";
+import "./cardsPage.css";
 
 let bizCardArr = [];
 const MyCards = () => {
@@ -73,7 +74,7 @@ const MyCards = () => {
         <input
           onChange={(ev) => setUserInput(ev.target.value)}
           type="text"
-          className="form-control"
+          className="form-control input-style"
           id="qFilter"
           value={userInput}
           onKeyUp={handleKeyUp}
@@ -86,7 +87,7 @@ const MyCards = () => {
             handleSort("asc");
           }}
           type="button"
-          className="btn btn-primary me-1"
+          className="btn btn-primary me-1 btn-new"
         >
           <FontAwesomeIcon icon={faArrowUpZA} />
         </button>
@@ -95,7 +96,7 @@ const MyCards = () => {
             handleSort("desc");
           }}
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary btn-new"
         >
           <FontAwesomeIcon icon={faArrowDownAZ} />
         </button>
@@ -109,6 +110,8 @@ const MyCards = () => {
               desc={item.description}
               img={item.image.url}
               alt={item.image.alt}
+              address={item.address}
+              phone={item.phone}
               id={item._id}
               onDelete={handleDelete}
               show={true}

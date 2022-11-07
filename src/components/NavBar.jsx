@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import LinkSort from "components/LinkSort";
 import { NavLink, useHistory } from "react-router-dom";
+import "components/navbar.css";
 
 let links = [
   {
@@ -74,11 +75,17 @@ const NavBarComponent = () => {
   }, [loggedIn]);
 
   const changeStyle = (ev) => {
-    ev.target.style.color = "black";
+    if (ev.target.classList.value.includes("active")) {
+      return;
+    }
+    ev.target.style.color = "#fff";
   };
 
   const changeStyleBack = (ev) => {
-    ev.target.style.color = "rgba(55,55,55,.5)";
+    if (ev.target.attributes.class.value.includes("active")) {
+      return;
+    }
+    ev.target.style.color = "#fff6";
   };
 
   const handleLogout = () => {
@@ -90,7 +97,7 @@ const NavBarComponent = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-dark">
+      <nav className="navbar navbar-expand-lg nav-color">
         <div className="container-fluid">
           <NavLink to={"/"} className="navbar-brand">
             Navbar
@@ -106,7 +113,10 @@ const NavBarComponent = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div
+            className="collapse navbar-collapse link-color"
+            id="navbarSupportedContent"
+          >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {links.map((item, index) => (
                 <LinkSort
@@ -126,7 +136,7 @@ const NavBarComponent = () => {
                 : ""}
               <li className="nav-item">
                 <span
-                  style={{ color: "#000" }}
+                  style={{ color: "#fff" }}
                   className="nav-link fw-semibold"
                 >
                   {loggedIn ? "Welcome " + name : "Welcome guest"}{" "}
@@ -140,7 +150,8 @@ const NavBarComponent = () => {
                       onClick={handleLogout}
                       role="button"
                       key={item.label + index}
-                      style={{ color: "rgba(55,55,55,.7)" }}
+                      className="link-hover"
+                      style={{ color: "#fff6" }}
                       onMouseEnter={changeStyle}
                       onMouseLeave={changeStyleBack}
                     >
@@ -149,11 +160,14 @@ const NavBarComponent = () => {
                   ))
                 : authLinks.loggedOut.map((item, index) => (
                     <NavLink
-                      className="text-decoration-none nav-link"
+                      className="text-decoration-none nav-link link-hover"
                       role="button"
                       key={item.label + index}
-                      isActive={(match) => match && match.isExact}
                       to={item.link}
+                      style={{ color: "#fff6" }}
+                      activeStyle={{ color: "#fff" }}
+                      onMouseEnter={changeStyle}
+                      onMouseLeave={changeStyleBack}
                     >
                       {item.label}
                     </NavLink>

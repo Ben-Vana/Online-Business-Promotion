@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import BizCardComp from "components/BizCardComp";
+import "./cardsPage.css";
 
 const MoreInfoPage = () => {
   const [bizArr, setArr] = useState(null);
@@ -29,15 +30,18 @@ const MoreInfoPage = () => {
       <div className="mt-1">
         <button
           type="button"
-          className="btn btn-dark mb-2"
+          className="btn btn-dark mb-2 btn-new"
           onClick={handleBack}
         >
-          Go back
+          Go Back
         </button>
         <BizCardComp
           name={bizArr.title}
           desc={bizArr.description}
           img={bizArr.image.url}
+          alt={bizArr.image.alt}
+          address={bizArr.address}
+          phone={bizArr.phone}
           id={bizArr._id}
           show={false}
         />
