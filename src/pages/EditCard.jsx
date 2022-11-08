@@ -138,23 +138,35 @@ const EditCard = () => {
   };
 
   return (
-    <CardInput
-      pageTitle="Edit Business Card"
-      title={userInput.title}
-      subTitle={userInput.subTitle}
-      description={userInput.description}
-      address={userInput.address}
-      phone={userInput.phone}
-      url={userInput.url}
-      handleUserInput={handleInputChange}
-      handleSubmitBtn={handleSubmitBtn}
-      titleErr={errMsg.titleErr}
-      subTitleErr={errMsg.subTitleErr}
-      descriptionErr={errMsg.descriptionErr}
-      addressErr={errMsg.addressErr}
-      phoneErr={errMsg.phoneErr}
-      urlErr={errMsg.urlErr}
-    />
+    <div
+      className="mt-4"
+      style={{
+        backgroundColor: "#404258",
+        width: "60vw",
+        paddingBlock: "2rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <CardInput
+        pageTitle="Edit Business Card"
+        title={userInput.title}
+        subTitle={userInput.subTitle}
+        description={userInput.description}
+        address={userInput.address}
+        phone={userInput.phone}
+        url={userInput.url}
+        handleUserInput={handleInputChange}
+        handleSubmitBtn={handleSubmitBtn}
+        titleErr={errMsg.titleErr}
+        subTitleErr={errMsg.subTitleErr}
+        descriptionErr={errMsg.descriptionErr}
+        addressErr={errMsg.addressErr}
+        phoneErr={errMsg.phoneErr}
+        urlErr={errMsg.urlErr}
+      />
+    </div>
   );
 };
 

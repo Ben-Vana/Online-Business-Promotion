@@ -27,7 +27,7 @@ const MoreInfoPage = () => {
 
   return (
     bizArr && (
-      <div className="mt-1">
+      <div style={{ alignSelf: "flex-start", width: "70vw" }} className="mt-2">
         <button
           type="button"
           className="btn btn-dark mb-2 btn-new"

@@ -1,3 +1,5 @@
+import "./cardInput.css";
+
 const CardInput = ({
   pageTitle,
   title,
@@ -17,15 +19,16 @@ const CardInput = ({
 }) => {
   return (
     <>
-      <h3 className="mt-4">{pageTitle}</h3>
-      <form>
-        <div className="form-floating mb-3 mt-2">
+      <h3>{pageTitle}</h3>
+      <form className="w-50 form-style">
+        <div className="form-floating mb-3 mt-2 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
-            className="form-control"
+            className="form-control card-input-new"
             id="title"
             value={title}
+            placeholder="Title"
           />
           <label htmlFor="title">
             Title
@@ -45,13 +48,14 @@ const CardInput = ({
               "Title must contain between 2 and 256 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3">
+        <div className="form-floating mb-3 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
-            className="form-control"
+            className="form-control card-input-new"
             id="subTitle"
             value={subTitle}
+            placeholder="SubTitle"
           />
           <label htmlFor="subTitle">
             SubTitle
@@ -71,13 +75,14 @@ const CardInput = ({
               "SubTitle must contain between 2 and 256 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3">
+        <div className="form-floating mb-3 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
-            className="form-control"
+            className="form-control card-input-new"
             id="description"
             value={description}
+            placeholder="Description"
           />
           <label htmlFor="description">
             Description
@@ -97,13 +102,14 @@ const CardInput = ({
               "Description must contain between 2 and 1024 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3">
+        <div className="form-floating mb-3 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
-            className="form-control"
+            className="form-control card-input-new"
             id="address"
             value={address}
+            placeholder="Address"
           />
           <label htmlFor="address">
             Address
@@ -123,14 +129,15 @@ const CardInput = ({
               "Address must contain between 2 and 256 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3">
+        <div className="form-floating mb-3 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
-            className="form-control"
+            className="form-control card-input-new"
             id="phone"
             value={phone}
             maxLength="14"
+            placeholder="Phone"
           />
           <label htmlFor="phone">
             Phone Number
@@ -149,13 +156,14 @@ const CardInput = ({
             {phoneErr && "Phone must contain between 9 and 14 numbers"}
           </div>
         </div>
-        <div className="form-floating mb-2">
+        <div className="form-floating mb-2 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
-            className="form-control"
+            className="form-control card-input-new"
             id="url"
             value={url}
+            placeholder="BusinessImageAddress"
           />
           <label htmlFor="url">Business Image Address</label>
           <div style={{ color: "red", fontSize: 14 }}>
@@ -165,9 +173,9 @@ const CardInput = ({
         <button
           onClick={handleSubmitBtn}
           type="submit"
-          className="btn btn-primary mb-1"
+          className="btn mt-4 btn-primary grid-btn"
         >
-          {pageTitle === "Add New Business Card" ? "Add Card" : "Update"}
+          {pageTitle === "Add New Business Card" ? "Create Card" : "Update"}
         </button>
       </form>
     </>

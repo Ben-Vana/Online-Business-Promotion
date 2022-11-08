@@ -61,39 +61,47 @@ const BizCardPage = () => {
 
   return (
     <>
-      <div className="form-floating mb-3 mt-2">
-        <input
-          onChange={(ev) => setUserInput(ev.target.value)}
-          type="text"
-          className="form-control input-style"
-          id="qFilter"
-          value={userInput}
-          onKeyUp={handleKeyUp}
-        />
-        <label style={{ color: "#fffa", opacity: 1 }} htmlFor="qFilter">
-          Search Card:
-        </label>
-      </div>
-      <div className="btn-group" role="group" aria-label="Basic example">
-        <button
-          onClick={() => {
-            handleSort("desc");
-          }}
-          type="button"
-          className="btn btn-primary me-1 btn-new"
+      <div className="page-container">
+        <div className="input-container form-floating mb-1 mt-3">
+          <input
+            onChange={(ev) => setUserInput(ev.target.value)}
+            type="text"
+            className="form-control input-style"
+            id="qFilter"
+            value={userInput}
+            onKeyUp={handleKeyUp}
+            placeholder="Search Card:"
+          />
+          <label style={{ color: "#fff" }} htmlFor="qFilter">
+            Search Card:
+          </label>
+        </div>
+        <div
+          className="btn-group group-style"
+          role="group"
+          aria-label="Basic example"
         >
-          <FontAwesomeIcon icon={faArrowUpZA} />
-        </button>
-        <button
-          onClick={() => {
-            handleSort("asc");
-          }}
-          type="button"
-          className="btn btn-primary btn-new"
-        >
-          <FontAwesomeIcon icon={faArrowDownAZ} />
-        </button>
+          <button
+            onClick={() => {
+              handleSort("desc");
+            }}
+            type="button"
+            className="btn btn-primary btn-new"
+          >
+            <FontAwesomeIcon icon={faArrowUpZA} />
+          </button>
+          <button
+            onClick={() => {
+              handleSort("asc");
+            }}
+            type="button"
+            className="btn btn-primary btn-new"
+          >
+            <FontAwesomeIcon icon={faArrowDownAZ} />
+          </button>
+        </div>
       </div>
+
       <div className=" row row-cols-md-4 g-2 mt-2">
         {cardArr.map((item) => (
           <BizCardComp

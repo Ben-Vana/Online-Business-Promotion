@@ -16,14 +16,15 @@ const RegisterForm = ({
 }) => {
   return (
     <>
-      {isBusiness && <h3 className="mt-3">Add Your Business Today!</h3>}
-      <form className="mt-4" onSubmit={handleSubmit}>
-        <div className="form-floating my-3 d-flex">
+      <h3 style={{ height: "3%" }} className="mt-5 form-container">
+        {isBusiness ? "Add Your Business Today!" : "Register"}
+      </h3>
+
+      <form className="mt-4 form-grid w-50" onSubmit={handleSubmit}>
+        <div className="input-container form-floating my-3 d-flex">
           <input
             type="text"
-            className={`form-control input-new w-50 ${
-              nameMsg ? "is-invalid" : ""
-            }`}
+            className={`form-control input-new ${nameMsg ? "is-invalid" : ""}`}
             style={{ background: "none" }}
             id="name"
             placeholder="Name"
@@ -73,7 +74,7 @@ const RegisterForm = ({
         ) : (
           ""
         )}
-        <div className="form-floating my-3 w-50">
+        <div className="input-container form-floating my-3">
           <input
             type="email"
             className={`form-control input-new ${emailMsg ? "is-invalid" : ""}`}
@@ -104,7 +105,7 @@ const RegisterForm = ({
         ) : (
           ""
         )}
-        <div className="form-floating my-3 d-flex w-50">
+        <div className="input-container form-floating my-3 d-flex">
           <input
             type="password"
             className={`form-control input-new ${

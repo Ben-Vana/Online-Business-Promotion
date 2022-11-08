@@ -133,7 +133,7 @@ const RegisterPage = () => {
         classNames="node"
         in={isBusiness}
       >
-        <div ref={nodeRef}>
+        <div className="form-container" ref={nodeRef}>
           <RegisterForm
             name={userInput.name}
             email={userInput.email}

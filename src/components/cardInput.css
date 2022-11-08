@@ -1,0 +1,26 @@
+.card-input-new {
+  color: #fff !important;
+  background-color: #474e68 !important;
+  border: 1px solid #000 !important;
+}
+
+.form-style {
+  display: grid;
+  grid-template-columns: repeat(10, 10%);
+  grid-template-rows: repeat(7, 1fr);
+}
+
+.grid-node {
+  grid-column: 1/11;
+}
+
+.grid-btn {
+  grid-column: 4/8 !important;
+  background-color: #6b728e !important;
+  margin-block: auto;
+  border: 1px solid #000 !important;
+}
+
+.grid-btn:hover {
+  background-color: #404258 !important;
+}

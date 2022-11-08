@@ -37,7 +37,14 @@ const App = () => {
 
   return (
     <div className="main-theme">
-      <div className="container">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+        className="container"
+      >
         <NavBarComponent />
         {!tryLogin && (
           <Switch>

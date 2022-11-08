@@ -4,6 +4,10 @@
   border: 1px solid #000 !important;
 }
 
+.input-style:focus-visible {
+  box-shadow: none !important;
+}
+
 .btn-new {
   background-color: #474e68 !important;
   border: 1px solid #000 !important;
@@ -15,4 +19,23 @@
 
 .btn-new:focus-visible {
   box-shadow: none !important;
+}
+
+.page-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-container {
+  width: 80%;
+  margin: auto;
+}
+
+.group-style {
+  display: grid !important;
+  margin: auto;
+  width: 80%;
+  grid-template-columns: repeat(2, 4%);
 }
