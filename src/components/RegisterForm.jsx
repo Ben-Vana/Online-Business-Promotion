@@ -21,7 +21,10 @@ const RegisterForm = ({
       </h3>
 
       <form className="mt-4 form-grid w-50" onSubmit={handleSubmit}>
-        <div className="input-container form-floating my-3 d-flex">
+        <div
+          style={{ gridRow: 1 }}
+          className="input-container form-floating my-3 d-flex"
+        >
           <input
             type="text"
             className={`form-control input-new ${nameMsg ? "is-invalid" : ""}`}
@@ -67,14 +70,15 @@ const RegisterForm = ({
             icon={faCircleInfo}
           />
         </div>
-        {nameMsg ? (
-          <div style={{ color: "red", marginTop: -15, fontSize: 14 }}>
+        {nameMsg && (
+          <div style={{ gridRow: 1 }} className="err-grid">
             Invalid Name
           </div>
-        ) : (
-          ""
         )}
-        <div className="input-container form-floating my-3">
+        <div
+          style={{ gridRow: 2 }}
+          className="input-container form-floating my-3"
+        >
           <input
             type="email"
             className={`form-control input-new ${emailMsg ? "is-invalid" : ""}`}
@@ -99,13 +103,16 @@ const RegisterForm = ({
           </label>
         </div>
         {emailMsg ? (
-          <div style={{ color: "red", marginTop: -15, fontSize: 14 }}>
+          <div style={{ gridRow: 2 }} className="err-grid">
             Invalid Email
           </div>
         ) : (
           ""
         )}
-        <div className="input-container form-floating my-3 d-flex">
+        <div
+          style={{ gridRow: 3 }}
+          className="input-container form-floating my-3 d-flex"
+        >
           <input
             type="password"
             className={`form-control input-new ${
@@ -153,7 +160,7 @@ const RegisterForm = ({
           />
         </div>
         {passwordMsg ? (
-          <div style={{ color: "red", marginTop: -15, fontSize: 14 }}>
+          <div style={{ gridRow: 3 }} className="err-grid">
             Invalid Password
           </div>
         ) : (

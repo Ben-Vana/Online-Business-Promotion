@@ -109,7 +109,15 @@ const RegisterPage = () => {
             className={`nav-link ntab-style ${
               isBusiness ? "" : "active tab-style"
             }`}
-            onClick={() => setBusiness(false)}
+            onClick={() => {
+              setBusiness(false);
+              setErrMsg({
+                nameMsg: "",
+                emailMsg: "",
+                passwordMsg: "",
+                errCalled: false,
+              });
+            }}
             aria-current="page"
           >
             Register
@@ -121,7 +129,15 @@ const RegisterPage = () => {
             className={`nav-link ntab-style ${
               isBusiness ? "active tab-style" : ""
             }`}
-            onClick={() => setBusiness(true)}
+            onClick={() => {
+              setBusiness(true);
+              setErrMsg({
+                nameMsg: "",
+                emailMsg: "",
+                passwordMsg: "",
+                errCalled: false,
+              });
+            }}
           >
             Register for business
           </span>

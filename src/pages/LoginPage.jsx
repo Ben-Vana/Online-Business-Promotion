@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useAutoLogin from "hooks/useAutoLogin";
+import jwt_Decode from "jwt-decode";
 import "./Login.css";
 
 const LoginPage = () => {
@@ -42,7 +43,20 @@ const LoginPage = () => {
       .then(({ data }) => {
         localStorage.setItem("token", data.token);
         autoLoginFunc(data.token);
-        history.push("/");
+        if (jwt_Decode(data.token).biz) {
+          axios
+            .get("/cards/my-cards")
+            .then(({ data }) => {
+              if (data.length > 0) {
+                history.push("/");
+              } else {
+                history.push("/createcard");
+              }
+            })
+            .catch((err) => console.log(err));
+        } else {
+          history.push("/");
+        }
       })
       .catch((err) => {
         if (err.response.data) {
