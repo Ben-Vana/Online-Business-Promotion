@@ -20,7 +20,9 @@ const LoginPage = () => {
   const autoLoginFunc = useAutoLogin();
 
   const handleUserInputChange = (ev) => {
-    setLoginErr("");
+    if (setLoginErr !== "") {
+      setLoginErr("");
+    }
     let newUserInput = JSON.parse(JSON.stringify(userInput));
     newUserInput[ev.target.id] = ev.target.value;
     setUserInput(newUserInput);
@@ -70,13 +72,13 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="form-container mt-5">
+      <div className="login-form-container mt-5">
         <h2 className="mt-5">Login page</h2>
-        <form className="mt-4 w-50 form-grid" onSubmit={handleSubmit}>
-          <div className="input-container form-floating mb-3">
+        <form className="mt-4 login-form-grid" onSubmit={handleSubmit}>
+          <div className="login-input-container form-floating">
             <input
               type="email"
-              className="form-control input-new"
+              className="form-control login-input-new"
               id="email"
               placeholder="name@example.com"
               value={userInput.email}
@@ -87,10 +89,10 @@ const LoginPage = () => {
               Email address
             </label>
           </div>
-          <div className="input-container form-floating mb-3">
+          <div className="login-input-container form-floating mb-3">
             <input
               type="password"
-              className="form-control input-new"
+              className="form-control login-input-new"
               id="password"
               placeholder="Password"
               value={userInput.password}
@@ -99,9 +101,9 @@ const LoginPage = () => {
             <label style={{ color: "#fff" }} htmlFor="password">
               Password
             </label>
-            <div style={{ color: "red" }}>{loginErr}</div>
+            <div style={{ color: "red", height: "1px" }}>{loginErr}</div>
           </div>
-          <button className="btn btn-style btn-primary">Sign in</button>
+          <button className="btn login-btn-style btn-primary">Sign in</button>
         </form>
       </div>
     </>

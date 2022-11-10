@@ -16,11 +16,11 @@ const RegisterForm = ({
 }) => {
   return (
     <>
-      <h3 style={{ height: "3%" }} className="mt-5 form-container">
+      <h3 style={{ height: "3%" }} className="mt-5">
         {isBusiness ? "Add Your Business Today!" : "Register"}
       </h3>
 
-      <form className="mt-4 form-grid w-50" onSubmit={handleSubmit}>
+      <form className="mt-4 form-grid" onSubmit={handleSubmit}>
         <div
           style={{ gridRow: 1 }}
           className="input-container form-floating my-3 d-flex"
@@ -53,8 +53,9 @@ const RegisterForm = ({
             place="top"
             effect="solid"
             type="dark"
+            globalEventOff="touchend"
             delayShow={100}
-            clickable={true}
+            scrollHide={false}
           >
             Name should be at least 2 characters long,
             <br /> and must not contain numbers.
@@ -67,6 +68,8 @@ const RegisterForm = ({
             }}
             data-for="nameInfo"
             data-tip
+            data-event="mouseenter click"
+            data-event-off="mouseleave"
             icon={faCircleInfo}
           />
         </div>
@@ -139,11 +142,11 @@ const RegisterForm = ({
           </label>
           <ReactTooltip
             id="passwordInfo"
-            place="top"
             effect="solid"
             type="dark"
             delayShow={100}
-            clickable={true}
+            globalEventOff="touchend"
+            scrollHide={false}
           >
             Password must have 8+ characters,
             <br /> at least 1 number, and at least 1 letter.
@@ -156,6 +159,8 @@ const RegisterForm = ({
             }}
             data-for="passwordInfo"
             data-tip
+            data-event="mouseenter click"
+            data-event-off="mouseleave"
             icon={faCircleInfo}
           />
         </div>

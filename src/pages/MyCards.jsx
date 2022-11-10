@@ -71,7 +71,7 @@ const MyCards = () => {
   return (
     <>
       <div className="page-container">
-        <div className="input-container form-floating mb-1 mt-3">
+        <div className="card-input-container form-floating mb-1 mt-3">
           <input
             onChange={(ev) => setUserInput(ev.target.value)}
             type="text"

@@ -20,8 +20,8 @@ const CardInput = ({
   return (
     <>
       <h3>{pageTitle}</h3>
-      <form className="w-50 form-style">
-        <div className="form-floating mb-3 mt-2 grid-node">
+      <form className="form-style mb-2">
+        <div className="form-floating mb-4 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
@@ -43,12 +43,12 @@ const CardInput = ({
               *Required
             </span>
           </label>
-          <div style={{ color: "red", fontSize: 14 }}>
+          <div className="edit-err">
             {titleErr &&
               "Title must contain between 2 and 256 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3 grid-node">
+        <div className="form-floating mb-4 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
@@ -70,12 +70,12 @@ const CardInput = ({
               *Required
             </span>
           </label>
-          <div style={{ color: "red", fontSize: 14 }}>
+          <div className="edit-err">
             {subTitleErr &&
               "SubTitle must contain between 2 and 256 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3 grid-node">
+        <div className="form-floating mb-4 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
@@ -97,12 +97,12 @@ const CardInput = ({
               *Required
             </span>
           </label>
-          <div style={{ color: "red", fontSize: 14 }}>
+          <div className="edit-err">
             {descriptionErr &&
               "Description must contain between 2 and 1024 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3 grid-node">
+        <div className="form-floating mb-4 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
@@ -124,12 +124,12 @@ const CardInput = ({
               *Required
             </span>
           </label>
-          <div style={{ color: "red", fontSize: 14 }}>
+          <div className="edit-err">
             {addressErr &&
               "Address must contain between 2 and 256 letters or numbers"}
           </div>
         </div>
-        <div className="form-floating mb-3 grid-node">
+        <div className="form-floating mb-4 grid-node">
           <input
             onChange={handleUserInput}
             type="text"
@@ -152,7 +152,7 @@ const CardInput = ({
               *Required
             </span>
           </label>
-          <div style={{ color: "red", fontSize: 14 }}>
+          <div className="edit-err">
             {phoneErr && "Phone must contain between 9 and 14 numbers"}
           </div>
         </div>
@@ -166,14 +166,14 @@ const CardInput = ({
             placeholder="BusinessImageAddress"
           />
           <label htmlFor="url">Business Image Address</label>
-          <div style={{ color: "red", fontSize: 14 }}>
+          <div className="edit-err">
             {urlErr && "Image adress must not contain over 1024 characters"}
           </div>
         </div>
         <button
           onClick={handleSubmitBtn}
           type="submit"
-          className="btn mt-4 btn-primary grid-btn"
+          className="btn btn-primary grid-btn"
         >
           {pageTitle === "Add New Business Card" ? "Create Card" : "Update"}
         </button>

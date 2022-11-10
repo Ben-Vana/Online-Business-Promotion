@@ -1,15 +1,15 @@
-.input-new {
+.login-input-new {
   color: #000 !important;
   background-color: #474e68 !important;
   border: 1px solid #000 !important;
 }
 
-.input-new:focus-visible {
+.login-input-new:focus-visible {
   box-shadow: none !important;
   border: 1px solid #000 !important;
 }
 
-.btn-style {
+.login-btn-style {
   background-color: #474e68 !important;
   border: 1px solid #000 !important;
   grid-column: 3/6;
@@ -17,25 +17,43 @@
   margin-block: auto;
 }
 
-.btn-style:hover {
+.login-btn-style:hover {
   background-color: #404258 !important;
 }
 
-.form-container {
+.login-form-container {
   display: flex;
   flex-direction: column;
   height: 70vh;
   align-items: center;
   background-color: #404258;
   width: 50vw;
+  overflow: auto;
 }
 
-.form-grid {
+.login-form-grid {
+  width: 60%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 44%);
 }
 
-.input-container {
+.login-input-container {
   grid-column: 1/8;
+}
+
+@media screen and (max-width: 1500px) {
+  .login-form-container {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .login-form-container {
+    width: 95vw;
+    height: 80vh;
+  }
+  .login-form-grid {
+    width: 85%;
+  }
 }

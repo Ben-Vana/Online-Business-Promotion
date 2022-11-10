@@ -138,17 +138,7 @@ const EditCard = () => {
   };
 
   return (
-    <div
-      className="mt-4"
-      style={{
-        backgroundColor: "#404258",
-        width: "60vw",
-        paddingBlock: "2rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+    <div className="mt-4 edit-container">
       <CardInput
         pageTitle="Edit Business Card"
         title={userInput.title}

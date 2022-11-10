@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import validate from "validation/validation";
 import cardSchema from "validation/card.validation";
 import CardInput from "components/CardInput";
+import "components/cardInput.css";
 
 const AddBizCard = () => {
   const [userInput, setUserInput] = useState({
@@ -121,17 +122,7 @@ const AddBizCard = () => {
   };
 
   return (
-    <div
-      className="mt-4"
-      style={{
-        backgroundColor: "#404258",
-        width: "60vw",
-        paddingBlock: "2rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+    <div className="mt-4 edit-container">
       <CardInput
         pageTitle="Add New Business Card"
         title={userInput.title}
