@@ -55,7 +55,7 @@ const LoginPage = () => {
                 history.push("/createcard");
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => setLoginErr("Error, Please try again later."));
         } else {
           history.push("/");
         }

@@ -22,9 +22,7 @@ const BizCardPage = () => {
         let { data } = await axios.get("/cards/cards");
         bizCardArr = data;
         setCardArr(bizCardArr);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     })();
   }, []);
 
@@ -117,6 +115,11 @@ const BizCardPage = () => {
           />
         ))}
       </div>
+      {!cardArr[0] && (
+        <div className="spinner-border mt-5" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      )}
     </>
   );
 };

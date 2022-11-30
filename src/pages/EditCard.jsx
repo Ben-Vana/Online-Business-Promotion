@@ -41,7 +41,10 @@ const EditCard = () => {
           url: data.image.url,
         });
       } catch (err) {
-        console.log(err);
+        setErrMsg({
+          titleErr: "Can't get card's information",
+          errCalled: true,
+        });
       }
     })();
   }, []);
@@ -132,7 +135,10 @@ const EditCard = () => {
           history.push("/mycards");
         }
       } catch (err) {
-        console.log(err);
+        setErrMsg({
+          urlErr: "Error, Please try again later",
+          errCalled: true,
+        });
       }
     }
   };
