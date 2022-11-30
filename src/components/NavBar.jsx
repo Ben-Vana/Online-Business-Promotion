@@ -69,7 +69,7 @@ const NavBarComponent = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          history.push("/login");
         });
     }
   }, [loggedIn]);

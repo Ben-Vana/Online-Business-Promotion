@@ -116,7 +116,10 @@ const AddBizCard = () => {
           history.push("/mycards");
         })
         .catch((err) => {
-          console.log(err);
+          setErrMsg({
+            urlErr: "Error, Please try again later",
+            errCalled: true,
+          });
         });
     }
   };

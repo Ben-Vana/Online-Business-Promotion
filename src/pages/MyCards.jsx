@@ -21,9 +21,7 @@ const MyCards = () => {
         let { data } = await axios.get(`/cards/my-cards`);
         bizCardArr = data;
         setCardArr(bizCardArr);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     })();
   }, []);
 
@@ -59,10 +57,7 @@ const MyCards = () => {
   };
 
   const handleDelete = (id) => {
-    axios
-      .delete(`cards/${id}`)
-      .then((res) => console.log("deleted"))
-      .catch((err) => console.log(err));
+    axios.delete(`cards/${id}`).then().catch();
 
     bizCardArr = bizCardArr.filter((item) => item._id !== id);
     setCardArr(bizCardArr);
@@ -127,6 +122,11 @@ const MyCards = () => {
             ))}
         </div>
       </div>
+      {!cardArr[0] && (
+        <div className="spinner-border mt-5" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      )}
     </>
   );
 };

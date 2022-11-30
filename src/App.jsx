@@ -53,7 +53,8 @@ const App = () => {
             <Route path="/register" component={RegisterPage}></Route>
             <Route path="/cardspage" component={BizCardPage}></Route>
             <LoginGuard path="/createcard" component={AddBizCard}></LoginGuard>
-            <LoginGuard path="/myCards" component={MyCards}></LoginGuard>
+            {/* <LoginGuard path="/myCards" component={MyCards}></LoginGuard> */}
+            <Route path="/myCards" component={MyCards}></Route>
             <LoginGuard
               path="/moreinfo/:id"
               component={MoreInfoPage}
