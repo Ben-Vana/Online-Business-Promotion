@@ -100,20 +100,21 @@ const BizCardPage = () => {
         </div>
       </div>
 
-      <div className=" row row-cols-md-4 g-2 mt-2">
-        {cardArr.map((item) => (
-          <BizCardComp
-            key={item.title + item._id}
-            name={item.title}
-            desc={item.description}
-            img={item.image.url}
-            alt={item.image.alt}
-            address={item.address}
-            phone={item.phone}
-            id={item._id}
-            show={true}
-          />
-        ))}
+      <div className="row g-2 mt-2 w-100">
+        {cardArr &&
+          cardArr.map((item) => (
+            <BizCardComp
+              key={item.title + item._id}
+              name={item.title}
+              desc={item.description}
+              img={item.image.url}
+              alt={item.image.alt}
+              address={item.address}
+              phone={item.phone}
+              id={item._id}
+              show={true}
+            />
+          ))}
       </div>
       {!cardArr[0] && (
         <div className="spinner-border mt-5" role="status">

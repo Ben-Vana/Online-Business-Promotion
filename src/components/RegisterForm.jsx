@@ -171,7 +171,7 @@ const RegisterForm = ({
         ) : (
           ""
         )}
-        <button className="btn btn-style btn-primary">Sign up</button>
+        <button className="btn btn-style btn-primary">Register</button>
       </form>
     </>
   );
