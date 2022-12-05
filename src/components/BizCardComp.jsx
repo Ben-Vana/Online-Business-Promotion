@@ -18,7 +18,7 @@ const BizCardComp = ({
   show,
 }) => {
   return (
-    <div className="col-4 card-w">
+    <div className="col-sm-4">
       <div
         className="card"
         style={{

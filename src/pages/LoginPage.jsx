@@ -103,7 +103,7 @@ const LoginPage = () => {
             </label>
             <div style={{ color: "red", height: "1px" }}>{loginErr}</div>
           </div>
-          <button className="btn login-btn-style btn-primary">Sign in</button>
+          <button className="btn login-btn-style btn-primary">Login</button>
         </form>
       </div>
     </>

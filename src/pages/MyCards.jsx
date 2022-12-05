@@ -57,10 +57,13 @@ const MyCards = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`cards/${id}`).then().catch();
-
-    bizCardArr = bizCardArr.filter((item) => item._id !== id);
-    setCardArr(bizCardArr);
+    axios
+      .delete(`cards/${id}`)
+      .then(() => {
+        bizCardArr = bizCardArr.filter((item) => item._id !== id);
+        setCardArr(bizCardArr);
+      })
+      .catch();
   };
 
   return (
@@ -104,7 +107,7 @@ const MyCards = () => {
             <FontAwesomeIcon icon={faArrowDownAZ} />
           </button>
         </div>
-        <div className=" row row-cols-md-4 g-2 mt-2">
+        <div className=" row row-cols-md-4 g-2 mt-2 w-100">
           {cardArr &&
             cardArr.map((item) => (
               <BizCardComp
