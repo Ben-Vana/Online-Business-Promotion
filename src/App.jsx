@@ -13,7 +13,9 @@ import { useState, useEffect } from "react";
 import useAutoLogin from "hooks/useAutoLogin";
 import { useSelector } from "react-redux";
 import Footer from "components/Footer";
+import AboutUs from "pages/AboutUs";
 import "./App.css";
+import NotFound from "pages/NotFound";
 
 const App = () => {
   const [tryLogin, setTryLogin] = useState(true);
@@ -49,6 +51,7 @@ const App = () => {
         {!tryLogin && (
           <Switch>
             <Route path="/" exact component={HomePage}></Route>
+            <Route path="/aboutus" exact component={AboutUs}></Route>
             <Route path="/login" component={LoginPage}></Route>
             <Route path="/register" component={RegisterPage}></Route>
             <Route path="/cardspage" component={BizCardPage}></Route>
@@ -59,6 +62,7 @@ const App = () => {
               component={MoreInfoPage}
             ></LoginGuard>
             <LoginGuard path="/editcard/:id" component={EditCard}></LoginGuard>
+            <Route path="*" component={NotFound} />
           </Switch>
         )}
       </div>
