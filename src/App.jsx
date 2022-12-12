@@ -51,7 +51,7 @@ const App = () => {
         {!tryLogin && (
           <Switch>
             <Route path="/" exact component={HomePage}></Route>
-            <Route path="/aboutus" exact component={AboutUs}></Route>
+            <Route path="/aboutus" component={AboutUs}></Route>
             <Route path="/login" component={LoginPage}></Route>
             <Route path="/register" component={RegisterPage}></Route>
             <Route path="/cardspage" component={BizCardPage}></Route>
