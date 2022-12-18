@@ -8,9 +8,12 @@ import useQparamsFilter from "hooks/useQparamsFilter";
 import "./cardsPage.css";
 
 let bizCardArr = [];
+
 const MyCards = () => {
   const [userInput, setUserInput] = useState("");
-  const [cardArr, setCardArr] = useState(bizCardArr);
+  const [cardArr, setCardArr] = useState([]);
+  const [error, setError] = useState({ dataErr: false, searchErr: false });
+
   const location = useLocation();
   const qp = useQparamsFilter();
   const history = useHistory();
@@ -21,17 +24,29 @@ const MyCards = () => {
         let { data } = await axios.get(`/cards/my-cards`);
         bizCardArr = data;
         setCardArr(bizCardArr);
-      } catch (err) {}
+      } catch (err) {
+        const tempError = { ...error };
+        tempError.dataErr = true;
+        setError(tempError);
+      }
     })();
   }, []);
 
   useEffect(() => {
+    let tempError = { ...error };
+    tempError.searchErr = false;
     const qParam = new URLSearchParams(location.search);
     if (qParam.has("filter")) {
       setUserInput(qParam.get("filter"));
     }
     if (qParam.toString() !== "") {
-      setCardArr(qp(qParam, bizCardArr));
+      const searchCard = qp(qParam, bizCardArr);
+      if (searchCard[0]) setCardArr(searchCard);
+      else if (!searchCard[0]) {
+        tempError.searchErr = true;
+        setCardArr(searchCard);
+      }
+      setError(tempError);
     }
   }, [location, bizCardArr]);
 
@@ -107,29 +122,34 @@ const MyCards = () => {
             <FontAwesomeIcon icon={faArrowDownAZ} />
           </button>
         </div>
-        <div className=" row row-cols-md-4 g-2 mt-2 w-100">
-          {cardArr &&
-            cardArr.map((item) => (
-              <BizCardComp
-                key={item.title + item._id}
-                name={item.title}
-                desc={item.description}
-                img={item.image.url}
-                alt={item.image.alt}
-                address={item.address}
-                phone={item.phone}
-                id={item._id}
-                onDelete={handleDelete}
-                show={true}
-              />
-            ))}
-        </div>
       </div>
-      {!cardArr[0] && (
-        <div className="spinner-border mt-5" role="status">
-          <span className="visually-hidden">Loading...</span>
+      {error.dataErr && (
+        <div className="mt-5" style={{ fontSize: "2rem" }} role="status">
+          A problem has occured please refresh or try again later.
         </div>
       )}
+      {error.searchErr && !error.dataErr && (
+        <div className="mt-5" style={{ fontSize: "2rem" }} role="status">
+          Card does not exist
+        </div>
+      )}
+      <div className="row g-2 mt-2 w-100">
+        {cardArr &&
+          cardArr.map((item) => (
+            <BizCardComp
+              key={item.title + item._id}
+              name={item.title}
+              desc={item.description}
+              img={item.image.url}
+              alt={item.image.alt}
+              address={item.address}
+              phone={item.phone}
+              id={item._id}
+              onDelete={handleDelete}
+              show={true}
+            />
+          ))}
+      </div>
     </>
   );
 };

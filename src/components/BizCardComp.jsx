@@ -37,13 +37,15 @@ const BizCardComp = ({
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{desc}</p>
           <hr style={{ color: "#000" }} />
-          <div style={{ marginTop: "-0.2rem" }} className="card-text mb-2">
-            <span style={{ textDecoration: "underline", fontWeight: 600 }}>
-              Call us:
-            </span>{" "}
-            {phone}
-          </div>
-          <div className="card-text mb-3">{address}</div>
+          {phone && (
+            <div style={{ marginTop: "-0.2rem" }} className="card-text mb-2">
+              <span style={{ textDecoration: "underline", fontWeight: 600 }}>
+                Call us:
+              </span>
+              {" " + phone}
+            </div>
+          )}
+          {address && <div className="card-text mb-3">{address}</div>}
           {show ? (
             <Link
               to={`/moreinfo/${id}`}

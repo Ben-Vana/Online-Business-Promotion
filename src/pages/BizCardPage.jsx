@@ -10,7 +10,8 @@ import "./cardsPage.css";
 let bizCardArr = [];
 const BizCardPage = () => {
   const [userInput, setUserInput] = useState("");
-  const [cardArr, setCardArr] = useState(bizCardArr);
+  const [cardArr, setCardArr] = useState([]);
+  const [error, setError] = useState({ dataErr: false, searchErr: false });
 
   const location = useLocation();
   const history = useHistory();
@@ -22,17 +23,29 @@ const BizCardPage = () => {
         let { data } = await axios.get("/cards/cards");
         bizCardArr = data;
         setCardArr(bizCardArr);
-      } catch (err) {}
+      } catch (err) {
+        const tempError = { ...error };
+        tempError.dataErr = true;
+        setError(tempError);
+      }
     })();
   }, []);
 
   useEffect(() => {
+    let tempError = { ...error };
+    tempError.searchErr = false;
     const qParam = new URLSearchParams(location.search);
     if (qParam.has("filter")) {
       setUserInput(qParam.get("filter"));
     }
     if (qParam.toString() !== "") {
-      setCardArr(qp(qParam, bizCardArr));
+      const searchCard = qp(qParam, bizCardArr);
+      if (searchCard[0]) setCardArr(searchCard);
+      else if (!searchCard[0]) {
+        tempError.searchErr = true;
+        setCardArr(searchCard);
+      }
+      setError(tempError);
     }
   }, [location, bizCardArr]);
 
@@ -99,7 +112,20 @@ const BizCardPage = () => {
           </button>
         </div>
       </div>
-
+      {error.dataErr && (
+        <div
+          className="mt-5"
+          style={{ fontSize: "2rem", textAlign: "center" }}
+          role="status"
+        >
+          A problem has occured please refresh or try again later.
+        </div>
+      )}
+      {error.searchErr && !error.dataErr && (
+        <div className="mt-5" style={{ fontSize: "2rem" }} role="status">
+          Card does not exist
+        </div>
+      )}
       <div className="row g-2 mt-2 w-100">
         {cardArr &&
           cardArr.map((item) => (
@@ -116,11 +142,6 @@ const BizCardPage = () => {
             />
           ))}
       </div>
-      {!cardArr[0] && (
-        <div className="spinner-border mt-5" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      )}
     </>
   );
 };
